@@ -121,7 +121,22 @@ const Mutation = new GraphQLObjectType({
                 const book = {
                     name: args.name,
                     author: args.author,
-                    id: String.fromCharCode(new Math.random())
+                    id: Math.random().toString(36).substring(7)
+                }
+                books.push(book);
+                return book
+            }
+        },
+        addBook2: {
+            type: BookType,
+            args: {
+                name: {type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve(parent, args) {
+                const book = {
+                    name: args.name,
+                    author: "2",
+                    id: Math.random().toString(36).substring(7)
                 }
                 books.push(book);
                 return book

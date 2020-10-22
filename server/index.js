@@ -3,6 +3,8 @@ const { graphqlHTTP } = require('express-graphql');
 const { buildSchema } = require('graphql')
 const schema = require('./schema');
 
+const cors = require('cors');
+
 // // Construct a schema, using GraphQL schema language
 // const schema = buildSchema(`
 //   type Query {
@@ -18,6 +20,8 @@ const schema = require('./schema');
 // };
 
 const app = express();
+app.use(cors())
+
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
