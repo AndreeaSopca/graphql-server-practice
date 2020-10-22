@@ -7,7 +7,7 @@
         <h3 v-if="loading"> Loading </h3>
         <h3 v-if="error"> Oh No </h3>
         <div v-if="data != null && data.books.length">
-          <div v-for="book in data.books" :key="book.id">
+          <div v-for="book in data.books" :key="book.id" @click="selected = book.id">
            {{book.name}} {{book.author.name}} {{book.author.id}}
           </div>
         </div>
@@ -16,18 +16,23 @@
         </div>
       </template>
     </ApolloQuery>
-    <BookForm/>
+    <BookDetails :book-id="selected"/>
   </div>
 </template>
 
 <script>
-import BookForm from "@/components/BookForm";
+
+import BookDetails from "@/components/BookDetails";
 
 export default {
-  name: 'HelloWorld',
-  components: {BookForm},
+  name: 'AllBooks',
+  components: {BookDetails},
   props: {
-    msg: String
+  },
+  data() {
+    return {
+      selected: null
+    }
   }
 }
 </script>

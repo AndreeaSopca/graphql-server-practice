@@ -1,17 +1,21 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <AllBooks msg="Welcome to Your Vue.js App"/>
+    <BookForm/>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AllBooks from './components/AllBooks.vue'
+import BookForm from "@/components/BookForm";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    AllBooks,
+    BookForm
   }
 }
 </script>
