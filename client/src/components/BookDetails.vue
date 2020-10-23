@@ -1,15 +1,22 @@
 <template>
-  <div class="hello">
-    <h3>Book details {{ bookId }}</h3>
-    <div v-if="book != null">
-      <p>{{ book.name }}</p>
-      <p>{{ book.author.name }}</p>
-      <h3>Other books written b this author: </h3>
-      <ul v-if="booksByAuthor != null">
-        <li v-for="book in booksByAuthor" :key=book.id>
-          {{ book.name }}
-        </li>
-      </ul>
+  <div class="p-5 bg-gray-200 border-gray-400 shadow-md mx-2 rounded-md" v-if="book">
+    <div class="flex flex-row border-b-2 mb-5 ">
+      <svg class="fill-current text-gray-500 inline-block h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M0 0l20 10L0 20V0zm0 8l10 2-10 2V8z"/>
+      </svg>
+      <h3 class="text-font-semibold text-gray-700 text-lg ml-3">Book details</h3>
+    </div>
+    <div v-if="book != null" class="flex flex-col items-start">
+      <p class="py-1">{{ book.name }}</p>
+      <p class="py-1">{{ book.author.name }}</p>
+      <div v-if="filteredBooks && filteredBooks.length" class="mt-10">
+        <h3>Other books written by this author: </h3>
+        <ul>
+          <li v-for="book in filteredBooks" :key=book.id class="text-left">
+            {{ book.name }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -27,6 +34,12 @@ export default {
   data() {
     return {}
   },
+  computed: {
+    filteredBooks() {
+      let self = this;
+      return this.booksByAuthor.filter(el => el.id !== self.bookId);
+    }
+  },
   // Apollo-specific options
   apollo: {
     // Query with parameters
@@ -36,7 +49,8 @@ export default {
               book(id: $id){
               name,
                  author {
-                    name
+                    name,
+                    id
                     }
               }
               }`,
@@ -52,7 +66,8 @@ export default {
       // gql query
       query: gql`query booksByAuthor($authorId: ID!){
               booksByAuthor(authorId: $authorId){
-                 name
+                 name,
+                 id
                 }
               }`,
       // Reactive parameters
@@ -60,7 +75,7 @@ export default {
         console.log("This id: " + this.book.author.id);
         // Use vue reactive properties here
         return {
-          authorId: '3'
+          authorId: this.book.author.id
         }
       }
     },

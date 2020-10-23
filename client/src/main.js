@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import { createProvider } from './vue-apollo'
 
+import '@/assets/styles/app.css';
+
 Vue.config.productionTip = false
 
 new Vue({

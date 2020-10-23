@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "watch": "nodemon ./src/main.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "autoprefixer": "^10.0.1",
     "core-js": "^3.6.5",
+    "tailwindcss": "^1.9.5",
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.0-beta.11"
   },
@@ -20,6 +23,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "graphql-tag": "^2.9.0",
+    "nodemon": "^2.0.6",
     "vue-cli-plugin-apollo": "~0.22.2",
     "vue-template-compiler": "^2.6.11"
   },
